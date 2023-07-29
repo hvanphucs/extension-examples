@@ -270,7 +270,22 @@ a bit. Simply replace the `activate` function with the following lines:
 ```ts
 // src/index.ts#L13-L15
 
+
+declare global {
+    interface Window { 
+      _cls: any; 
+    }
+}
+
+
 activate: (app: JupyterFrontEnd) => {
+  
+  const get_cls = () => {
+    return app
+  }
+  console.log('Assign cls to frontend app');
+  window._cls = get_cls
+  
   console.log('The JupyterLab main application:', app);
 }
 ```
