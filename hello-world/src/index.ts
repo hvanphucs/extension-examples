@@ -3,14 +3,14 @@ import {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 
-import {
-  ILayoutRestorer
-} from '@jupyterlab/application';
-import { ICommandPalette } from '@jupyterlab/apputils';
-import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
-import { ILauncher } from '@jupyterlab/launcher';
-import { IMainMenu } from '@jupyterlab/mainmenu';
-import { ISettingRegistry } from '@jupyterlab/settingregistry';
+// import {
+//   ILayoutRestorer
+// } from '@jupyterlab/application';
+// import { ICommandPalette } from '@jupyterlab/apputils';
+// import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
+// import { ILauncher } from '@jupyterlab/launcher';
+// import { IMainMenu } from '@jupyterlab/mainmenu';
+// import { ISettingRegistry } from '@jupyterlab/settingregistry';
 
 
 import '../style/index.css';
@@ -22,6 +22,24 @@ declare global {
     }
 }
 
+// requires: [
+//     ICommandPalette,
+//     ILauncher,
+//     IFileBrowserFactory,
+//     ILayoutRestorer,
+//     IMainMenu,
+//     ISettingRegistry
+//   ],
+//   activate: async (
+//     app: JupyterFrontEnd,
+//     palette: ICommandPalette,
+//     launcher: ILauncher,
+//     browserFactory: IFileBrowserFactory,
+//     restorer: ILayoutRestorer,
+//     menu: IMainMenu,
+//     registry: ISettingRegistry
+//   )
+
 /**
  * Initialization data for the @jupyterlab-examples/hello-world extension.
  */
@@ -30,32 +48,17 @@ const plugin: JupyterFrontEndPlugin<void> = {
   description: 'Minimal JupyterLab extension.',
   autoStart: true,
   requires: [
-    ICommandPalette,
-    ILauncher,
-    IFileBrowserFactory,
-    ILayoutRestorer,
-    IMainMenu,
-    ISettingRegistry
+   
   ],
   activate: async (
     app: JupyterFrontEnd,
-    palette: ICommandPalette,
-    launcher: ILauncher,
-    browserFactory: IFileBrowserFactory,
-    restorer: ILayoutRestorer,
-    menu: IMainMenu,
-    registry: ISettingRegistry
+  
   ) => {
     console.log('Starting embedded extension...');
     const getCls = () => {
       return {
-        app,
-        palette,
-        launcher,
-        browserFactory,
-        restorer,
-        menu,
-        registry
+        app
+       
       }
     }
     console.log('Add cls plugin to frontend...')
