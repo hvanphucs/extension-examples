@@ -3,6 +3,18 @@ import {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 
+import {
+  ILayoutRestorer
+} from '@jupyterlab/application';
+import { ICommandPalette } from '@jupyterlab/apputils';
+import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
+import { ILauncher } from '@jupyterlab/launcher';
+import { IMainMenu } from '@jupyterlab/mainmenu';
+import { ISettingRegistry } from '@jupyterlab/settingregistry';
+
+
+import '../style/index.css';
+
 
 declare global {
     interface Window {
@@ -17,15 +29,37 @@ const plugin: JupyterFrontEndPlugin<void> = {
   id: '@jupyterlab-examples/hello-world:plugin',
   description: 'Minimal JupyterLab extension.',
   autoStart: true,
-  activate: (app: JupyterFrontEnd) => {
+  requires: [
+    ICommandPalette,
+    ILauncher,
+    IFileBrowserFactory,
+    ILayoutRestorer,
+    IMainMenu,
+    ISettingRegistry
+  ],
+  activate: async (
+    app: JupyterFrontEnd,
+    palette: ICommandPalette,
+    launcher: ILauncher,
+    browserFactory: IFileBrowserFactory,
+    restorer: ILayoutRestorer,
+    menu: IMainMenu,
+    registry: ISettingRegistry
+  ) => {
+    console.log('Starting embedded extension...');
     const getCls = () => {
-      return app
+      return {
+        app,
+        palette,
+        launcher,
+        browserFactory,
+        restorer,
+        menu,
+        registry
+      }
     }
-
-    console.log('Add cls plugin to frontend')
+    console.log('Add cls plugin to frontend...')
     window._cls = getCls
-
-    console.log('The JupyterLab main application:', app);
   }
 };
 
